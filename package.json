@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=dev node index.js",
-    "prod": "NODE_ENV=prod node index.js",
-    "test": "NODE_ENV=test jest --color --coverage --runInBand --watchAll"
+    "dev": "NODE_ENV=dev nodemon index.js",
+    "prod": "NODE_ENV=prod nodemon index.js",
+    "test": "NODE_ENV=test jest --color --coverage --runInBand --watchAll --verbose"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -25,6 +26,7 @@
   },
   "jest": {
     "verbose": true,
+    "testTimeout": 30000, 
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"

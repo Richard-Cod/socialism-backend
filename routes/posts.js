@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const authMiddleware = require('../middlewares/authMiddleware');
-const Post = require('../models/User');
+const Post = require('../models/Post');
 
 
 router.post('/create',authMiddleware, async (req, res) => {
@@ -11,7 +11,7 @@ router.post('/create',authMiddleware, async (req, res) => {
         title: req.body.title,
         content: req.body.content,
     })
-    res.send(postCreated);
+    res.status(201).send(postCreated);
   
     } catch (error) {
       res.status(500).send(error)
@@ -24,11 +24,11 @@ router.post('/create',authMiddleware, async (req, res) => {
 router.put('/:id',authMiddleware , async (req, res) => {
     try {
       const newData = req.body
-      const post = await Pos.findByIdAndUpdate(req.params.id , newData)
+      const post = await Post.findByIdAndUpdate(req.params.id , newData)
   
       if(!post) return res.status(404).send({message : "Post not found"})
   
-      res.send({message :"Post successfuly updated" })
+      res.status(200).send({message :"Post successfuly updated" })
     } catch (error) {
       res.status(500).send(error)
     }
@@ -42,7 +42,7 @@ router.put('/:id',authMiddleware , async (req, res) => {
     if(!post) return res.status(404).send({message : "Post not found"})
     res.send({message :"Post successfuly deleted" })
     } catch (error) {
-      res.send(error)
+      res.status(500).send(error)
     }
     });
   
